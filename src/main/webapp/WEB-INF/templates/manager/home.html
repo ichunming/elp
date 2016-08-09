@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<head th:include="common/header::header" />
+<body>
+	<div th:if="${uInfo != null}" th:text="${uInfo.getPrincipal()}"></div>
+	<h1>this is home page!</h1>
+
+	<p>
+		<a th:href="@{/article/view}">view article</a>
+	</p>
+	<p>
+		<a th:href="@{/logout}">logout</a>
+	</p>
+</body>
+<div th:include="common/footer::footer" th:remove="tag"></div>
+</html>
