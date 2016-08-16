@@ -4,6 +4,7 @@ import javax.servlet.ServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -57,13 +58,13 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@RequestParam("username") String username, @RequestParam("password") String password,
+	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
 			ServletRequest request, Model model) {
 		String eMsg = "";
 
-		// 用户名，密码非空check TODO
-		if ("".equals(username) || "".equals(password)) {
-			eMsg = "用户名/密码不能为空";
+		// 邮箱，密码非空check TODO
+		if ("".equals(email) || "".equals(password)) {
+			eMsg = "邮箱/密码不能为空";
 			model.addAttribute("eMsg", eMsg);
 			return "unmanager/login";
 		}
@@ -75,7 +76,7 @@ public class LoginController {
 		// 创建用户登录凭证
 		logger.debug("创建用户登入凭证...");
 		boolean rememberMe = WebUtils.isTrue(request, rememberMeParam);
-		UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
+		UsernamePasswordToken token = new UsernamePasswordToken(email, password, rememberMe);
 		
 		// 登入
 		try {
@@ -93,6 +94,10 @@ public class LoginController {
 			// 帐号被锁
 			logger.debug("帐号被锁");
 			eMsg = "帐号被锁";
+		} catch (DisabledAccountException e) {
+			// 帐号未激活
+			logger.debug("帐号未激活");
+			eMsg = "帐号未激活";
 		} catch (ExcessiveAttemptsException e) {
 			// 重复登入次数超过规定次数
 			logger.debug("重复登入次数超过规定次数");

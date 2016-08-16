@@ -9,6 +9,7 @@ import java.util.Set;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -25,6 +26,7 @@ import com.elp.model.User;
 import com.elp.service.PermissionService;
 import com.elp.service.RoleService;
 import com.elp.service.UserService;
+import com.elp.util.AppConst;
 
 public class MyRealm extends AuthorizingRealm {
 
@@ -66,11 +68,11 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// 用户信息
-		String username = (String)token.getPrincipal();
+		String email = (String)token.getPrincipal();
 		
-		// 通过用户名获取用户信息
-		logger.debug("通过用户名获取用户信息...");
-        User user = userService.findUserByName(username);
+		// 通过邮箱获取用户信息
+		logger.debug("通过邮箱获取用户信息...");
+        User user = userService.findUserByEmail(email);
         
         if(user == null) {
         	// 用户不存在
@@ -78,10 +80,14 @@ public class MyRealm extends AuthorizingRealm {
             throw new UnknownAccountException();
         }
         
-        if(Boolean.TRUE.equals(user.getLocked())) {
-        	// 用户被锁定
-        	logger.debug("用户被锁定");
-            throw new LockedAccountException();
+        if(user.getStatus() == AppConst.ACCOUNT_STATUS_INVALID) {
+        	// 帐户未激活
+        	logger.debug("帐户未激活");
+            throw new DisabledAccountException();
+        } else if (user.getStatus() == AppConst.ACCOUNT_STATUS_LOCKED) {
+        	// 帐户被锁定
+        	logger.debug("帐户被锁定");
+        	throw new LockedAccountException();
         }
         
         // 封装认证信息

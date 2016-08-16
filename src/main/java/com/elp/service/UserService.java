@@ -43,6 +43,13 @@ public interface UserService {
 	public User findUserByName(String name);
 
 	/**
+	 * 根据email查找用户
+	 * @param email
+	 * @return
+	 */
+	public User findUserByEmail(String email);
+	
+	/**
 	 * 帐户锁定
 	 * @param uid
 	 */
@@ -55,9 +62,9 @@ public interface UserService {
 	public void unlockUser(Long uid);
 	
 	/**
-	 * 用户名check
+	 * 邮箱存在性check
 	 * @param name
 	 * @return
 	 */
-	public boolean nameExist(String name);
+	public boolean emailExist(String email);
 }

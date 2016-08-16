@@ -35,7 +35,7 @@ public class PasswordHelper {
         
         // 计算password
         logger.debug("计算password...");;
-        String password = computeHash(user.getPassword(), user.getUsername() + salt);
+        String password = computeHash(user.getPassword(), user.getEmail() + salt);
         
         // salt,password设定
         logger.debug("salt,password设定...");

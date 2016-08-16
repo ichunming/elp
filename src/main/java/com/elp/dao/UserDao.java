@@ -17,4 +17,11 @@ public interface UserDao {
 	 * @return
 	 */
 	public User selectByName(String name);
+	
+	/**
+	 * 通过email查找用户
+	 * @param email
+	 * @return
+	 */
+	public User selectByEmail(String email);
 }

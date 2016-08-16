@@ -70,6 +70,17 @@ public class UserServiceImpl implements UserService {
 		return userDao.selectByName(name);
 	}
 
+	/**
+	 * 根据email查找用户
+	 * @param email
+	 * @return
+	 */
+	@Override
+	public User findUserByEmail(String email) {
+		// 查找用户
+		return userDao.selectByEmail(email);
+	}
+	
 	@Override
 	public void lockUser(Long uid) {
 		// TODO Auto-generated method stub
@@ -83,15 +94,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
-	 * 用户名check
-	 * @param name
+	 * 邮箱存在性check
+	 * @param email
 	 * @return
 	 */
 	@Override
-	public boolean nameExist(String name) {
-		// 通过用户名查找用户信息
-		logger.debug("通过用户名查找用户信息");
-		User user = this.findUserByName(name);
+	public boolean emailExist(String email) {
+		// 通过email查找用户信息
+		logger.debug("通过email查找用户信息");
+		User user = this.findUserByEmail(email);
 		
 		// 查询结果check
 		logger.debug("查询结果check");

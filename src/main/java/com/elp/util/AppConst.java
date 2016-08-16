@@ -20,4 +20,19 @@ public class AppConst {
 	 * 最大重复登入次数
 	 */
 	public static final int MAX_RETRY_COUNT = 5;
+	
+	/**
+	 * 用户帐户状态
+	 * 0：未激活
+	 * 1：正常
+	 * 2：锁定
+	 */
+	// 未激活
+	public static int ACCOUNT_STATUS_INVALID = 0;
+	
+	// 正常
+	public static int ACCOUNT_STATUS_ACTIVE = 1;
+	
+	// 锁定
+	public static int ACCOUNT_STATUS_LOCKED = 2;
 }

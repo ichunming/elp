@@ -32,22 +32,22 @@ public class RegisterController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@RequestParam("username")String username, @RequestParam("password")String password, Model model) {
+	public String register(@RequestParam("email")String email, @RequestParam("password")String password, Model model) {
 		String eMsg = "";
 		
-		// 用户名，密码非空check TODO
-		if ("".equals(username) || "".equals(password)) {
-			eMsg = "用户名/密码不能为空";
+		// 邮箱，密码非空check TODO
+		if ("".equals(email) || "".equals(password)) {
+			eMsg = "邮箱/密码不能为空";
 			model.addAttribute("eMsg", eMsg);
 			return "unmanager/register";
 		}
 		
-		// 用户名已存在check
-		logger.debug("用户名已存在check...");
-		if(userService.nameExist(username)) {
-			// 用户名已存在
-			logger.debug("用户名已存在");
-			eMsg = "用户名已存在";
+		// 邮箱已存在check
+		logger.debug("邮箱已存在check...");
+		if(userService.emailExist(email)) {
+			// 邮箱已存在
+			logger.debug("邮箱已存在");
+			eMsg = "邮箱已存在";
 			model.addAttribute("eMsg", eMsg);
 			
 			return "unmanager/register";
@@ -55,7 +55,7 @@ public class RegisterController {
 		
 		// 封装用户信息
 		logger.debug("封装用户信息...");
-		User user = new User(username, password);
+		User user = new User(email, password);
 		
 		// 创建用户
 		logger.debug("创建用户...");
