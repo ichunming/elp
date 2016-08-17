@@ -4,7 +4,6 @@
  */
 package com.elp.controller;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.web.servlet.ShiroHttpSession;
