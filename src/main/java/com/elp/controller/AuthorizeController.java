@@ -13,6 +13,6 @@ public class AuthorizeController {
 	@RequestMapping(value="/unauthorized", method=RequestMethod.GET)
 	public String unauthorized() {
 		logger.info("AuthorizeController /unauthorized");
-		return "manager/unauthorized";
+		return "unmanager/unauthorized";
 	}
 }

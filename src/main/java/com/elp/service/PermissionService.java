@@ -29,9 +29,9 @@ public interface PermissionService {
 	public void enablePermission(Long permissionId);
 	
 	/**
-	 * 根据用户名查找权限
-	 * @param name
+	 * 根据uid查找权限
+	 * @param uid
 	 * @return
 	 */
-	public Set<String> findPermissionsByName(String name);
+	public Set<String> findPermissionByUid(int uid);
 }

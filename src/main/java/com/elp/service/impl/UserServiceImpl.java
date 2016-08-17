@@ -66,8 +66,9 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public User findUserByName(String name) {
-		// 查找用户
-		return userDao.selectByName(name);
+		// 查找用户 TODO
+		//return userDao.selectByName(name);
+		return null;
 	}
 
 	/**

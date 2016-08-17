@@ -12,13 +12,6 @@ public interface UserDao {
 	public int insert(User user);
 	
 	/**
-	 * 通过用户名查找用户
-	 * @param name
-	 * @return
-	 */
-	public User selectByName(String name);
-	
-	/**
 	 * 通过email查找用户
 	 * @param email
 	 * @return

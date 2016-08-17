@@ -43,9 +43,9 @@ public interface RoleService {
 	public void uncorrelationPermissions(Long roleId, Long... permissionIds);
 	
 	/**
-	 * 根据用户名查找角色
-	 * @param name
+	 * 根据uid查找角色
+	 * @param uid
 	 * @return
 	 */
-	public Set<String> findRolesByName(String name);
+	public Set<String> findRoleByUid(int uid);
 }

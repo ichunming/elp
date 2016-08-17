@@ -56,15 +56,15 @@ public class RoleServiceImpl implements RoleService{
 	}
 	
 	/**
-	 * 根据用户名查找角色
-	 * @param name
+	 * 根据uid查找角色
+	 * @param uid
 	 * @return
 	 */
 	@Override
-	public Set<String> findRolesByName(String name) {
+	public Set<String> findRoleByUid(int uid) {
 		// 查询角色信息
 		logger.debug("查询角色信息");
-		List<String> result = roleDao.selectByName(name);
+		List<String> result = roleDao.selectByUid(uid);
 		return new HashSet<String>(result);
 	}
 }

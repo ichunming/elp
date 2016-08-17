@@ -2,10 +2,11 @@
  * 自定义CredentialsMatcher
  * ming 2016/07/27
  */
-package com.elp.credentials;
+package com.elp.shiro.credentials;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -13,12 +14,15 @@ import org.apache.shiro.authc.SaltedAuthenticationInfo;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.util.ByteSource;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.elp.helper.PasswordHelper;
+import com.elp.shiro.authc.MySimpleAuthenticationInfo;
 import com.elp.util.AppConst;
+import com.elp.util.Session;
+import com.elp.util.SessionManager;
 
 public class MyCredentialsMatcher implements CredentialsMatcher {
 
@@ -37,6 +41,7 @@ public class MyCredentialsMatcher implements CredentialsMatcher {
 	public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
 
 		String username = (String)token.getPrincipal();
+		int uid;
 		Object salt = null;
 		Object orgPassword = null;
 		String password = null;
@@ -60,13 +65,14 @@ public class MyCredentialsMatcher implements CredentialsMatcher {
             throw new ExcessiveAttemptsException();
         }
 		
-		if (info instanceof SaltedAuthenticationInfo) {
+		if (info instanceof SaltedAuthenticationInfo && info instanceof MySimpleAuthenticationInfo) {
 			// salt取得
 			logger.debug("salt取得");
 			salt = ((SaltedAuthenticationInfo) info).getCredentialsSalt();
+			uid = ((MySimpleAuthenticationInfo) info).getUid();
 		} else {
 			// 非SaltedAuthenticationInfo实例
-			logger.debug("非SaltedAuthenticationInfo实例");
+			logger.debug("非SaltedAuthenticationInfo & MySimpleAuthenticationInfo实例");
 			return false;
 		}
 
@@ -78,6 +84,11 @@ public class MyCredentialsMatcher implements CredentialsMatcher {
 			// 密码匹配成功
 			logger.debug("密码匹配成功，清除用户cache");
 			passwordRetryCache.remove(username);
+			
+			// 用户ID,用户邮箱存入session
+			logger.debug("用户ID,用户邮箱存入session");
+			SessionManager.setAttribute(Session.UID, uid);
+			SessionManager.setAttribute(Session.EMAIL, info.getPrincipals());
 			return true;
 		}
 		

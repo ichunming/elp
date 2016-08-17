@@ -15,12 +15,12 @@ public class ArticleController {
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String view() {
 		logger.info("ArticleController: /article/view...");
-		return "manager/view";
+		return "article/view";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String delete() {
 		logger.info("ArticleController: /article/delete...");
-		return "manager/delete";
+		return "article/delete";
 	}
 }

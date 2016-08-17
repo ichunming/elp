@@ -44,15 +44,15 @@ public class PermissionServiceImpl implements PermissionService{
 	}
 
 	/**
-	 * 根据用户名查找权限
-	 * @param name
+	 * 根据uid查找权限
+	 * @param uid
 	 * @return
 	 */
 	@Override
-	public Set<String> findPermissionsByName(String name) {
+	public Set<String> findPermissionByUid(int uid) {
 		// 权限取得
 		logger.debug("权限取得");
-		List<String> permissions = permissionDao.selectByName(name);
+		List<String> permissions = permissionDao.selectByUid(uid);
 		return new HashSet<String>(permissions);
 	}
 }

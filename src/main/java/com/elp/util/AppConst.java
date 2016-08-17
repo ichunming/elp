@@ -26,6 +26,7 @@ public class AppConst {
 	 * 0：未激活
 	 * 1：正常
 	 * 2：锁定
+	 * 3：删除
 	 */
 	// 未激活
 	public static int ACCOUNT_STATUS_INVALID = 0;
@@ -35,4 +36,12 @@ public class AppConst {
 	
 	// 锁定
 	public static int ACCOUNT_STATUS_LOCKED = 2;
+	
+	// 删除
+	public static int ACCOUNT_STATUS_DELETED = 3;
+	
+	/**
+	 * rememberMe 参数名
+	 */
+	public static String REMEMBER_ME_PARAMETER = "rememberMe";
 }

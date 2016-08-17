@@ -4,6 +4,10 @@
  */
 package com.elp.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.shiro.web.servlet.ShiroHttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.elp.model.User;
 import com.elp.service.UserService;
+import com.elp.util.AppConst;
+import com.elp.util.CookieManager;
 
 @Controller
 public class RegisterController {
@@ -25,7 +31,12 @@ public class RegisterController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register() {
+	public String register(HttpServletResponse response) {
+		// 清空Cookie
+		logger.debug("清空Cookie");
+		CookieManager.deleteCookie(response, AppConst.REMEMBER_ME_PARAMETER);
+		CookieManager.deleteCookie(response, ShiroHttpSession.DEFAULT_SESSION_ID_NAME);
+		
 		// 跳转注册页
 		logger.debug("跳转注册页");
 		return "unmanager/register";
@@ -55,7 +66,7 @@ public class RegisterController {
 		
 		// 封装用户信息
 		logger.debug("封装用户信息...");
-		User user = new User(email, password);
+		User user = new User(email, password, AppConst.ACCOUNT_STATUS_ACTIVE);
 		
 		// 创建用户
 		logger.debug("创建用户...");
