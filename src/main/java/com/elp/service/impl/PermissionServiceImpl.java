@@ -24,24 +24,6 @@ public class PermissionServiceImpl implements PermissionService{
 	
 	@Autowired
 	private PermissionDao permissionDao;
-	
-	@Override
-	public void createPermission(Permission permission) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void disablePermission(Long permissionId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enablePermission(Long permissionId) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/**
 	 * 根据uid查找权限
@@ -49,10 +31,58 @@ public class PermissionServiceImpl implements PermissionService{
 	 * @return
 	 */
 	@Override
-	public Set<String> findPermissionByUid(int uid) {
+	public Set<String> findPermissionByUid(Integer uid) {
 		// 权限取得
 		logger.debug("权限取得");
 		List<String> permissions = permissionDao.selectByUid(uid);
 		return new HashSet<String>(permissions);
+	}
+
+	
+	// *********************************************************
+	// 未实现方法
+	// *********************************************************
+	
+
+	@Override
+	public void createPermission(Permission permission) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void addUserPermission(Integer uid, Integer pid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Permission findPermissionByPid(Integer pid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void lockPermission(Integer pid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unlockPermission(Integer pid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deletePermission(Integer pid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeUserPermission(Integer uid, Integer pid) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -11,41 +11,54 @@ import com.elp.model.Role;
 public interface RoleService {
 
 	/**
-	 * 创建角色
+	 * 创建角色信息
 	 * @param role
 	 */
 	public void createRole(Role role);
 	
 	/**
-	 * 角色无效化
-	 * @param roleId
+	 * 添加用户-角色关系
+	 * @param uid
+	 * @param rid
 	 */
-	public void disableRole(Long roleId);
-	
-	/**
-	 * 角色有效化
-	 * @param roleId
-	 */
-	public void enableRole(Long roleId);
+	public void addUserRole(Integer uid, Integer rid);
 
 	/**
-	 * 添加权-限角色关系
-	 * @param roleId
-	 * @param permissionIds
+	 * 根据rid查找角色信息
+	 * @param rid
+	 * @return
 	 */
-	public void correlationPermissions(Long roleId, Long... permissionIds);
-	
+	public Role findRoleByRid(Integer rid);
+
 	/**
-	 * 移除权限-角色关系
-	 * @param roleId
-	 * @param permissionIds
-	 */
-	public void uncorrelationPermissions(Long roleId, Long... permissionIds);
-	
-	/**
-	 * 根据uid查找角色
+	 * 根据uid查找角色信息
 	 * @param uid
 	 * @return
 	 */
-	public Set<String> findRoleByUid(int uid);
+	public Set<String> findRoleByUid(Integer uid);
+	
+	/**
+	 * 锁定角色信息
+	 * @param rid
+	 */
+	public void lockRole(Integer rid);
+	
+	/**
+	 * 解锁角色信息
+	 * @param rid
+	 */
+	public void unlockRole(Integer rid);
+	
+	/**
+	 * 删除角色信息
+	 * @param rid
+	 */
+	public void deleteRole(Integer rid);
+
+	/**
+	 * 移除用户-角色关系
+	 * @param uid
+	 * @param rid
+	 */
+	public void removeUserRole(Integer uid, Integer rid);
 }

@@ -25,46 +25,64 @@ public class RoleServiceImpl implements RoleService{
 	@Autowired
 	private RoleDao roleDao;
 	
-	@Override
-	public void createRole(Role role) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void disableRole(Long roleId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enableRole(Long roleId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void correlationPermissions(Long roleId, Long... permissionIds) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void uncorrelationPermissions(Long roleId, Long... permissionIds) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	/**
 	 * 根据uid查找角色
 	 * @param uid
 	 * @return
 	 */
 	@Override
-	public Set<String> findRoleByUid(int uid) {
+	public Set<String> findRoleByUid(Integer uid) {
 		// 查询角色信息
 		logger.debug("查询角色信息");
 		List<String> result = roleDao.selectByUid(uid);
 		return new HashSet<String>(result);
+	}
+
+	
+	// *********************************************************
+	// 未实现方法
+	// *********************************************************
+	
+	
+	@Override
+	public void createRole(Role role) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void addUserRole(Integer uid, Integer rid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Role findRoleByRid(Integer rid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void lockRole(Integer rid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unlockRole(Integer rid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteRole(Integer rid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeUserRole(Integer uid, Integer rid) {
+		// TODO Auto-generated method stub
+		
 	}
 }

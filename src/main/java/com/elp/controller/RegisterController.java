@@ -69,7 +69,7 @@ public class RegisterController {
 		
 		// 创建用户
 		logger.debug("创建用户...");
-		userService.createUser(user);
+		userService.createAccount(user);
 		
 		// 返回登入页
 		logger.debug("用户创建成功");

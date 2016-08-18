@@ -9,11 +9,69 @@
 		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
 		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
 	</resultMap>
+	
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select id, name, description, status, create_date, update_date
+		from permission
+		where id = #{pid,jdbcType=INTEGER}
+	</select>
 
+	<insert id="insert" parameterType="com.elp.model.Permission">
+		insert into permission
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				name,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			create_date,
+			update_date
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			now(),
+			now()
+		</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.elp.model.Permission">
+		update permission
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			update_date = now()
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from permission
+		where id = #{pid,jdbcType=INTEGER}
+	</delete>
+	
 	<select id="selectByUid" parameterType="INTEGER" resultType="String">
-        select p.name from permission p, user_permission up
-        where p.id = up.pid
-        and p.status = 1
-        and up.uid = #{uid, jdbcType=INTEGER}
+		select p.name from permission p, user_permission up
+		where p.id = up.pid
+		and p.status = 1
+		and up.uid = #{uid, jdbcType=INTEGER}
 	</select>
 </mapper>

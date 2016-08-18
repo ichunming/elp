@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.elp.dao.UserDao;
+import com.elp.dao.UserInfoDao;
 import com.elp.helper.PasswordHelper;
 import com.elp.model.User;
+import com.elp.model.UserInfo;
 import com.elp.service.UserService;
 
 @Service("userService")
@@ -22,12 +24,15 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private UserInfoDao userInfoDao;
+	
 	/**
 	 * 创建帐户
 	 * @param user
 	 */
 	@Override
-	public void createUser(User user) {
+	public void createAccount(User user) {
 		logger.debug("创建帐户...");
 		
 		// 加密处理
@@ -41,57 +46,15 @@ public class UserServiceImpl implements UserService {
 		logger.debug("帐户创建成功");
 	}
 
-	@Override
-	public void changePassword(Long uid, String newPassword) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void correlationRoles(Long uid, Long... roleIds) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void uncorrelationiRoles(Long uid, Long... roleIds) {
-		// TODO Auto-generated method stub
-
-	}
-
 	/**
-	 * 根据用户名查找用户
-	 * @param username
-	 * @return
-	 */
-	@Override
-	public User findUserByName(String name) {
-		// 查找用户 TODO
-		//return userDao.selectByName(name);
-		return null;
-	}
-
-	/**
-	 * 根据email查找用户
+	 * 根据email查找帐户
 	 * @param email
 	 * @return
 	 */
 	@Override
-	public User findUserByEmail(String email) {
+	public User findAccountByEmail(String email) {
 		// 查找用户
 		return userDao.selectByEmail(email);
-	}
-	
-	@Override
-	public void lockUser(Long uid) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void unlockUser(Long uid) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -103,7 +66,7 @@ public class UserServiceImpl implements UserService {
 	public boolean emailExist(String email) {
 		// 通过email查找用户信息
 		logger.debug("通过email查找用户信息");
-		User user = this.findUserByEmail(email);
+		User user = this.findAccountByEmail(email);
 		
 		// 查询结果check
 		logger.debug("查询结果check");
@@ -116,5 +79,63 @@ public class UserServiceImpl implements UserService {
 		// 未查找到用户
 		logger.debug("未查找到用户");
 		return false;
+	}
+
+	/**
+	 * 查找用户信息
+	 * @param uid
+	 * @return
+	 */
+	@Override
+	public UserInfo findUserInfo(Integer uid) {
+		return userInfoDao.select(uid);
+	}
+	
+	
+	// *********************************************************
+	// 未实现方法
+	// *********************************************************
+	
+	
+	@Override
+	public void createUserInfo(UserInfo userInfo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changePassword(Integer uid, String newPassword) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void lockAccount(Integer uid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unlockAccount(Integer uid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAccount(Integer uid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateUserInfo(UserInfo userInfo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUserInfo(Integer uid) {
+		// TODO Auto-generated method stub
+		
 	}
 }

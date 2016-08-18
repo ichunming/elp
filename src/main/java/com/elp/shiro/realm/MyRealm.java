@@ -78,7 +78,7 @@ public class MyRealm extends AuthorizingRealm {
 		
 		// 通过邮箱获取用户信息
 		logger.debug("通过邮箱获取用户信息...");
-        User user = userService.findUserByEmail(email);
+        User user = userService.findAccountByEmail(email);
         
         if(user == null) {
         	// 用户不存在

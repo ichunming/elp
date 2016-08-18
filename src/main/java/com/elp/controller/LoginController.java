@@ -50,7 +50,7 @@ public class LoginController {
 
 			// 创建session
 			logger.debug("创建session");
-			User user = userService.findUserByEmail((String)currentUser.getPrincipal());
+			User user = userService.findAccountByEmail((String)currentUser.getPrincipal());
 			SessionManager.setAttribute(Session.UID, user.getId());
 			SessionManager.setAttribute(Session.EMAIL, user.getEmail());
 			
