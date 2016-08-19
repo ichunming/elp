@@ -20,6 +20,12 @@
         from user_info
         where uid = #{uid,jdbcType=INTEGER}
     </select>
+   
+    <select id="selectByUsername" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select uid
+        from user_info
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
     
 	<insert id="insert" parameterType="com.elp.model.UserInfo">
 		insert into user_info

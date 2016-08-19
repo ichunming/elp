@@ -30,4 +30,11 @@ public interface UserInfoDao {
 	 * @return
 	 */
 	public void delete(Integer uid);
+	
+	/**
+	 * 通过用户名查找用户信息
+	 * @param username
+	 * @return
+	 */
+	public UserInfo selectByUsername(String username);
 }

@@ -2,7 +2,7 @@
  * 自定义role filter
  * ming 2016/07/29
  */
-package com.elp.filter;
+package com.elp.shiro.filter;
 
 import java.util.List;
 

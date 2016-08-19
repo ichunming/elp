@@ -2,7 +2,7 @@
  * 密码服务Helper类
  * ming 2016/07/20
  */
-package com.elp.helper;
+package com.elp.util;
 
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.DefaultHashService;
@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.elp.model.User;
-import com.elp.util.AppConst;
 
 @Component
 public class PasswordHelper {

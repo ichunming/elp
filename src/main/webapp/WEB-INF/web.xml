@@ -12,7 +12,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext.xml,/WEB-INF/spring-mybatis.xml,/WEB-INF/spring-shiro.xml</param-value>
+		<param-value>/WEB-INF/applicationContext.xml,/WEB-INF/spring-mybatis.xml,/WEB-INF/spring-shiro.xml,/WEB-INF/spring-job.xml</param-value>
 	</context-param>
 
 	<!-- filter -->

@@ -15,9 +15,9 @@ import com.elp.service.UserService;
 
 @Controller
 @ResponseBody
-@RequestMapping("/api")
-public class UserApi {
-	private Logger logger = LoggerFactory.getLogger(UserApi.class);
+@RequestMapping("/api/user")
+public class UserControllerApi {
+	private Logger logger = LoggerFactory.getLogger(UserControllerApi.class);
 	
 	@Autowired
 	private UserService userService;

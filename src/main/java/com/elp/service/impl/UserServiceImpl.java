@@ -4,17 +4,21 @@
  */
 package com.elp.service.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.elp.dao.ReserveUserInfoDao;
 import com.elp.dao.UserDao;
 import com.elp.dao.UserInfoDao;
-import com.elp.helper.PasswordHelper;
+import com.elp.model.ReserveUserInfo;
 import com.elp.model.User;
 import com.elp.model.UserInfo;
 import com.elp.service.UserService;
+import com.elp.util.PasswordHelper;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -26,6 +30,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserInfoDao userInfoDao;
+	
+	@Autowired
+	private ReserveUserInfoDao reserveUserInfoDao;
 	
 	/**
 	 * 创建帐户
@@ -91,6 +98,30 @@ public class UserServiceImpl implements UserService {
 		return userInfoDao.select(uid);
 	}
 	
+	/**
+	 * 查找已使用系统预留用户信息
+	 * @return
+	 */
+	public List<ReserveUserInfo> findAllReserveUserInfo() {
+		return reserveUserInfoDao.selectAll();
+	}
+	
+	/**
+	 * 通过用户名查找用户信息
+	 * @param username
+	 * @return
+	 */
+	public UserInfo findUserInfoByUsername(String username) {
+		return userInfoDao.selectByUsername(username);
+	}
+	
+	/**
+	 * 更新系统预留用户信息
+	 * @param rui
+	 */
+	public void updateReserveUserInfo(ReserveUserInfo rui) {
+		reserveUserInfoDao.update(rui);
+	}
 	
 	// *********************************************************
 	// 未实现方法

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elp.dao.ReserveUserInfoDao">
+	<resultMap id="BaseResultMap" type="com.elp.model.ReserveUserInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="theme" property="theme" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="portrait" property="portrait" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select id, theme, username, portrait, status, create_date, update_date
+		from reserve_user_info
+	</select>
+
+	<insert id="insert" parameterType="com.elp.model.ReserveUserInfo">
+		insert into reserve_user_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="theme != null">
+				theme,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="portrait != null">
+				portrait,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			create_date,
+			update_date
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="theme != null">
+				#{theme,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="portrait != null">
+				#{portrait,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			now(),
+			now()
+		</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.elp.model.ReserveUserInfo">
+		update reserve_user_info
+		<set>
+			<if test="theme != null">
+				theme = #{theme,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="portrait != null">
+				portrait = #{portrait,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			update_date = now()
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from reserve_user_info
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+</mapper>
