@@ -29,7 +29,7 @@ public class ReserveUserInfoUpdateJob {
 	@Autowired
 	private JobService jobService;
 	
-	@Scheduled(cron = "0 44 16 * * ?")
+	@Scheduled(cron = "0 25 11 * * ?")
 	public void run() {
 		logger.debug("定时任务：系统预留用户信息更新...");
 		logger.debug("时间：" + new java.util.Date());
