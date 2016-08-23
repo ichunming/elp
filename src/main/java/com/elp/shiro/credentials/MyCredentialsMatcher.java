@@ -16,10 +16,10 @@ import org.apache.shiro.cache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.elp.consts.AppConst;
+import com.elp.consts.Session;
 import com.elp.shiro.authc.MySimpleAuthenticationInfo;
-import com.elp.util.AppConst;
 import com.elp.util.PasswordHelper;
-import com.elp.util.Session;
 import com.elp.util.SessionManager;
 
 public class MyCredentialsMatcher implements CredentialsMatcher {

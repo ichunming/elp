@@ -12,12 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.elp.consts.AppConst;
 import com.elp.model.ReserveUserInfo;
 import com.elp.model.SysJobLog;
 import com.elp.model.UserInfo;
 import com.elp.service.JobService;
 import com.elp.service.UserService;
-import com.elp.util.AppConst;
 
 @Component
 public class ReserveUserInfoUpdateJob {

@@ -4,7 +4,7 @@
 <head th:include="common/header::header" />
 <body>
 	<h1>登入</h1>
-	<div th:if="${eMsg != null}" th:text="${eMsg}"></div>
+	<div th:if="${cMsg != null}" th:text="${cMsg.getMessage()}"></div>
 	<form th:action="@{/login}" method="post">
 		<div>
 			<label> 用户名: <input type="text" name="email" />

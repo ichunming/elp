@@ -1,4 +1,4 @@
-package com.elp.util;
+package com.elp.consts;
 
 public class Session {
 

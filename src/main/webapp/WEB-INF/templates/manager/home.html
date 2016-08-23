@@ -2,7 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	
 <head th:include="common/header::header" />
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script> 
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 <body>
+<div id="emojis"></div>
+<div id="summernote"></div>
+<script>
+$.ajax({
+    url:'http://localhost:8080/api/emojis/retrieve',
+    type:'get',
+    success:function(data) {
+       window.emojis = Object.keys(data.data);
+       window.emojiUrls = data.data;
+       console.log('ajax request success');
+       $.grep(emojis, function(item) {
+         $("#emojis").append('<img src="' + emojiUrls[item] + '" width="25" />');
+       });
+         console.log(data.err_code);
+     },
+    error:function() {
+      console.log('ajax request fail');
+    }
+  });
+
+
+$("#summernote").summernote({ 
+ height: 100,
+ placeholder: 'type starting with : and any alphabet',
+ hint: {
+   match: /:([\-+\w]+)$/,
+   search: function (keyword, callback) {
+     callback($.grep(emojis, function (item) {
+       return item.indexOf(keyword)  === 0;
+     }));
+   },
+   template: function (item) {
+     var content = emojiUrls[item];
+     return '<img src="' + content + '" width="20" /> :' + item + ':';
+   },
+   content: function (item) {
+     var url = emojiUrls[item];
+     if (url) {
+       return $('<img />').attr('src', url).css('width', 20)[0];
+     }
+     return '';
+   }
+ }
+});
+
+
+</script>
+
+
+
+
+
+
 	<div th:if="${uInfo != null}" th:text="${uInfo.getPrincipal()}"></div>
 	<h1>this is home page!</h1>
 

@@ -25,13 +25,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.elp.consts.AppConst;
+import com.elp.consts.Session;
 import com.elp.model.User;
 import com.elp.service.PermissionService;
 import com.elp.service.RoleService;
 import com.elp.service.UserService;
 import com.elp.shiro.authc.MySimpleAuthenticationInfo;
-import com.elp.util.AppConst;
-import com.elp.util.Session;
 import com.elp.util.SessionManager;
 
 public class MyRealm extends AuthorizingRealm {

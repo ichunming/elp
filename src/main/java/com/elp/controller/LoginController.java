@@ -22,17 +22,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.elp.consts.AppConst;
+import com.elp.consts.Session;
+import com.elp.entity.CustomMessage;
 import com.elp.model.User;
 import com.elp.service.UserService;
-import com.elp.util.Session;
+import com.elp.util.MessageManager;
 import com.elp.util.SessionManager;
 
 @Controller
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-	private String rememberMeParam = "rememberMe";
-	
 	@Autowired
 	private UserService userService;
 	
@@ -84,12 +85,12 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
 			ServletRequest request, Model model) {
-		String eMsg = "";
+		CustomMessage cMsg = null;
 
 		// 邮箱，密码非空check TODO
 		if ("".equals(email) || "".equals(password)) {
-			eMsg = "邮箱/密码不能为空";
-			model.addAttribute("eMsg", eMsg);
+			cMsg = MessageManager.getWarnMsg("WLO001");
+			model.addAttribute("cMsg", cMsg);
 			return "unmanager/login";
 		}
 
@@ -99,7 +100,7 @@ public class LoginController {
 
 		// 创建用户登录凭证
 		logger.debug("创建用户登入凭证...");
-		boolean rememberMe = WebUtils.isTrue(request, rememberMeParam);
+		boolean rememberMe = WebUtils.isTrue(request, AppConst.REMEMBER_ME_PARAMETER);
 		UsernamePasswordToken token = new UsernamePasswordToken(email, password, rememberMe);
 		
 		// 登入
@@ -109,31 +110,31 @@ public class LoginController {
 		} catch (UnknownAccountException e) {
 			// 用户名错误
 			logger.debug("用户名错误");
-			eMsg = "用户名/密码错误";
+			cMsg = MessageManager.getWarnMsg("WLO002");
 		} catch (IncorrectCredentialsException e) {
 			// 密码错误
 			logger.debug("密码错误");
-			eMsg = "用户名/密码错误";
+			cMsg = MessageManager.getWarnMsg("WLO003");
 		} catch (LockedAccountException e) {
 			// 帐号被锁
 			logger.debug("帐号被锁");
-			eMsg = "帐号被锁";
+			cMsg = MessageManager.getWarnMsg("WLO004");
 		} catch (ExpiredCredentialsException e) {
 			// 帐号未激活
 			logger.debug("帐号未激活");
-			eMsg = "帐号未激活";
+			cMsg = MessageManager.getWarnMsg("WLO005");
 		} catch (DisabledAccountException e) {
 			// 帐号被删除
 			logger.debug("帐号被删除");
-			eMsg = "帐号不可用";
+			cMsg = MessageManager.getWarnMsg("WLO006");
 		} catch (ExcessiveAttemptsException e) {
 			// 重复登入次数超过规定次数
 			logger.debug("重复登入次数超过规定次数");
-			eMsg = "频繁登入，请10分钟后再尝试";
+			cMsg = MessageManager.getWarnMsg("WLO007");
 		} catch (AuthenticationException e) {
 			// 认证异常 TODO
 			logger.debug("认证异常");
-			eMsg = "认证异常";
+			cMsg = MessageManager.getErrorMsg("ELO001");
 		}
 		
 		// 认证
@@ -144,7 +145,7 @@ public class LoginController {
 
 			// 添加提示信息，跳转登入页
 			logger.debug("跳转登入页");
-			model.addAttribute("eMsg", eMsg);
+			model.addAttribute("cMsg", cMsg);
 			return "unmanager/login";
 		}
 

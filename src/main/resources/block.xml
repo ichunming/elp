@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<block>
+		<type>01</type>
+		<name>用户列表</name>
+	</block>
+	<block>
+		<type>02</type>
+		<name>标签云库</name>
+	</block>
+</root>

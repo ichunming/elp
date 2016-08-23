@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.elp.consts.AppConst;
 import com.elp.model.User;
 import com.elp.service.UserService;
-import com.elp.util.AppConst;
 import com.elp.util.CookieManager;
 
 @Controller

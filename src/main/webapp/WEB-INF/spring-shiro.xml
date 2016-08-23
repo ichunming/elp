@@ -100,7 +100,7 @@
 				/article/delete=user,perms[user:delete]
 				/article/**=user,roles[admin,user]
 				/manager=authc,roles[admin]
-				/api/**=user,roles[admin]
+				<!-- /api/**=user,roles[admin] -->
 			</value>
 		</property>
 	</bean>

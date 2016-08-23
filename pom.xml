@@ -18,6 +18,7 @@
 		<mysql.version>5.1.34</mysql.version>
 		<mybatis.version>3.3.0</mybatis.version>
 		<mybatis-spring.version>1.2.2</mybatis-spring.version>
+		<jdom.version>2.0.5</jdom.version>
 		<thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
 		<project.build.sourceEncoding>
 			UTF-8
@@ -188,6 +189,13 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.7.4</version>
 		</dependency>
+		
+	    <dependency>
+            <groupId>org.jdom</groupId>
+            <artifactId>jdom2</artifactId>
+            <version>${jdom.version}</version>
+        </dependency>
+		
 	</dependencies>
 
 	<build>

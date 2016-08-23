@@ -7,10 +7,10 @@ package com.elp.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.elp.consts.AppConst;
 import com.elp.dao.SysJobLogDao;
 import com.elp.model.SysJobLog;
 import com.elp.service.JobService;
-import com.elp.util.AppConst;
 
 @Service
 public class JobServiceImpl implements JobService {
