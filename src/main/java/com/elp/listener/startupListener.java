@@ -45,11 +45,6 @@ public class startupListener implements ServletContextListener {
     	
     	// load message
     	MessageManager.loadMessage(this.getClass().getClassLoader().getResource("message.properties").getPath());
-		
-    	// load emoji
-		Map<String, String> emojis = PropUtil.getPropMap(this.getClass().getClassLoader().getResource("emojis.properties").getPath());
-		// 保存emoji
-		servletcontextevent.getServletContext().setAttribute("emojis", emojis);
     	
 		// success
 		logger.info("应用程序启动成功!");

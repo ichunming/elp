@@ -9,7 +9,7 @@ public class AppConst {
 	/**
 	 * 加密算法
 	 */
-	public static final String ALGORITHM_NAME = "MD5";
+	public static final String ALGORITHM_NAME = "SHA-1";
 	
 	/**
 	 * 加密迭代次数
