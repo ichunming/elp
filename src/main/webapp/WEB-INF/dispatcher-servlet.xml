@@ -53,5 +53,7 @@
         <property name="prefix" value="/WEB-INF/templates/" />
         <property name="suffix" value=".html" />
         <property name="templateMode" value="HTML" />
+        <!-- update immediately -->
+        <property name="cacheable" value="false" />
     </bean>
 </beans>
